@@ -1,3 +1,15 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Created on December 1 2018
+
+@author: Philippe Delandmeter
+
+useful functions for hexahedra manipulation
+"""
+
+
 import numpy as np
 
 
