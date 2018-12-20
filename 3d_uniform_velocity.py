@@ -26,14 +26,12 @@ zet = .5
 globVel = [1,1,1]
 
 u0 = h_u.get_faceNormalVelocity(globVel, x, y, z, [0,3,7,4])
-u0 = 2
 U0 = u0 * i_u.jacobian3D_lin_face(x, y, z, 0, eta, zet, 'zonal')
 u1 = h_u.get_faceNormalVelocity(globVel, x, y, z, [1,2,6,5])
 U1 = u1 * i_u.jacobian3D_lin_face(x, y, z, 1, eta, zet, 'zonal')
 v0 = h_u.get_faceNormalVelocity(globVel, x, y, z, [0,4,5,1])
 V0 = v0 * i_u.jacobian3D_lin_face(x, y, z, xsi, 0, zet, 'meridional')
 v1 = h_u.get_faceNormalVelocity(globVel, x, y, z, [3,7,6,2])
-v1 = 2.44598710041
 V1 = v1 * i_u.jacobian3D_lin_face(x, y, z, xsi, 1, zet, 'meridional')
 w0 = h_u.get_faceNormalVelocity(globVel, x, y, z, [0,1,2,3])
 W0 = w0 * i_u.jacobian3D_lin_face(x, y, z, xsi, eta, 0, 'vertical')
@@ -95,6 +93,6 @@ dphidxsi, dphideta, dphidzet = i_u.dphidxsi3D_lin(xsi, eta, zet)
 u = np.dot(dphidxsi, x) * dxsidt + np.dot(dphideta, x) * detadt + np.dot(dphidzet, x) * dzetdt 
 v = np.dot(dphidxsi, y) * dxsidt + np.dot(dphideta, y) * detadt + np.dot(dphidzet, y) * dzetdt 
 w = np.dot(dphidxsi, z) * dxsidt + np.dot(dphideta, z) * detadt + np.dot(dphidzet, z) * dzetdt 
-print 'uvw analytical', u, v, w
+print('uvw analytical: %1.16e, %1.16e, %1.16e' % (u, v, w) )
 
 assert np.allclose([u, v, w], globVel)

@@ -91,8 +91,6 @@ def jacobian3D_lin(hexa_x, hexa_y, hexa_z, xsi, eta, zet):
     jac = dxdxsi * (dydeta*dzdzet - dzdeta*dydzet)\
         - dxdeta * (dydxsi*dzdzet - dzdxsi*dydzet)\
         + dxdzet * (dydxsi*dzdeta - dzdxsi*dydeta)
-    if jac < 0:
-        print 'bou'
     return abs(jac)
 
 

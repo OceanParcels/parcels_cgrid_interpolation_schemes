@@ -22,7 +22,6 @@ eta = .6
 globVel = [1.,1.]
 
 u0 = h_u.get_edgeNormalVelocity(globVel, x, y, [0,3])
-u0 = 2
 U0 = u0 * i_u.length2d_lin_edge(x, y, [0,3])
 u1 = h_u.get_edgeNormalVelocity(globVel, x, y, [1,2])
 U1 = u1 * i_u.length2d_lin_edge(x, y, [1,2])
@@ -30,11 +29,6 @@ v0 = h_u.get_edgeNormalVelocity(globVel, x, y, [1,0])
 V0 = v0 * i_u.length2d_lin_edge(x, y, [1,0])
 v1 = h_u.get_edgeNormalVelocity(globVel, x, y, [2,3])
 V1 = v1 * i_u.length2d_lin_edge(x, y, [2,3])
-
-V1 = U0+V0-U1
-v1 = V1 / i_u.length2d_lin_edge(x, y, [2,3])
-print U0+V0-U1-V1
-print v1
 
 jac = i_u.jacobian2D_lin(x, y, xsi, eta)
 dxsidt = i_u.interpolate(i_u.phi1D_lin, [U0, U1], xsi) / jac
@@ -44,6 +38,6 @@ dphidxsi, dphideta = i_u.dphidxsi2D_lin(xsi, eta)
 
 u = np.dot(dphidxsi, x) * dxsidt + np.dot(dphideta, x) * detadt 
 v = np.dot(dphidxsi, y) * dxsidt + np.dot(dphideta, y) * detadt 
-print 'uv analytical', u, v
+print('uv analytical: %1.16e, %1.16e' % (u, v) )
 
 assert np.allclose([u,v], globVel)
