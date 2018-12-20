@@ -15,7 +15,8 @@ import numpy as np
 
 def generate_extrudedPlanarHexahedra(x_in, y_in, z_in):
     """Function generating an extruded hexahedra containing only planar faces.
-    By extruded hexahedra, we mean that x and y coordinates of first four nodes are the same as next four ones,
+    By extruded hexahedra, we mean that x and y coordinates
+    of first four nodes are the same as next four ones,
     as it is often the case in oceanography meshes.
     The order of the nodes of the hexahedra are the following.
 

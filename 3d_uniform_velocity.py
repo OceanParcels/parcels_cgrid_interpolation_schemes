@@ -6,7 +6,8 @@ Created on December 1 2018
 
 @author: Philippe Delandmeter
 
-Master file interpolating a 3D uniform velocity in an unstructured hexahedra
+Master file interpolating a 3D uniform velocity
+in an unstructured C-grid hexahedra
 """
 
 
@@ -23,19 +24,19 @@ z = [0, 0, 0, 0, 1, 1, 1, 1]
 xsi = .3
 eta = .6
 zet = .5
-globVel = [1,1,1]
+globVel = [1, 1, 1]
 
-u0 = h_u.get_faceNormalVelocity(globVel, x, y, z, [0,3,7,4])
+u0 = h_u.get_faceNormalVelocity(globVel, x, y, z, [0, 3, 7, 4])
 U0 = u0 * i_u.jacobian3D_lin_face(x, y, z, 0, eta, zet, 'zonal')
-u1 = h_u.get_faceNormalVelocity(globVel, x, y, z, [1,2,6,5])
+u1 = h_u.get_faceNormalVelocity(globVel, x, y, z, [1, 2, 6, 5])
 U1 = u1 * i_u.jacobian3D_lin_face(x, y, z, 1, eta, zet, 'zonal')
-v0 = h_u.get_faceNormalVelocity(globVel, x, y, z, [0,4,5,1])
+v0 = h_u.get_faceNormalVelocity(globVel, x, y, z, [0, 4, 5, 1])
 V0 = v0 * i_u.jacobian3D_lin_face(x, y, z, xsi, 0, zet, 'meridional')
-v1 = h_u.get_faceNormalVelocity(globVel, x, y, z, [3,7,6,2])
+v1 = h_u.get_faceNormalVelocity(globVel, x, y, z, [3, 7, 6, 2])
 V1 = v1 * i_u.jacobian3D_lin_face(x, y, z, xsi, 1, zet, 'meridional')
-w0 = h_u.get_faceNormalVelocity(globVel, x, y, z, [0,1,2,3])
+w0 = h_u.get_faceNormalVelocity(globVel, x, y, z, [0, 1, 2, 3])
 W0 = w0 * i_u.jacobian3D_lin_face(x, y, z, xsi, eta, 0, 'vertical')
-w1 = h_u.get_faceNormalVelocity(globVel, x, y, z, [4,5,6,7])
+w1 = h_u.get_faceNormalVelocity(globVel, x, y, z, [4, 5, 6, 7])
 W1 = w1 * i_u.jacobian3D_lin_face(x, y, z, xsi, eta, 1, 'vertical')
 
 # Computing fluxes in half left hexahedron -> flux_u05
@@ -90,9 +91,9 @@ dzetdt = i_u.interpolate(i_u.phi1D_quad, [W0, W05, W1], zet) / jac
 
 dphidxsi, dphideta, dphidzet = i_u.dphidxsi3D_lin(xsi, eta, zet)
 
-u = np.dot(dphidxsi, x) * dxsidt + np.dot(dphideta, x) * detadt + np.dot(dphidzet, x) * dzetdt 
-v = np.dot(dphidxsi, y) * dxsidt + np.dot(dphideta, y) * detadt + np.dot(dphidzet, y) * dzetdt 
-w = np.dot(dphidxsi, z) * dxsidt + np.dot(dphideta, z) * detadt + np.dot(dphidzet, z) * dzetdt 
-print('uvw analytical: %1.16e, %1.16e, %1.16e' % (u, v, w) )
+u = np.dot(dphidxsi, x) * dxsidt + np.dot(dphideta, x) * detadt + np.dot(dphidzet, x) * dzetdt
+v = np.dot(dphidxsi, y) * dxsidt + np.dot(dphideta, y) * detadt + np.dot(dphidzet, y) * dzetdt
+w = np.dot(dphidxsi, z) * dxsidt + np.dot(dphideta, z) * detadt + np.dot(dphidzet, z) * dzetdt
+print('uvw analytical: %1.16e, %1.16e, %1.16e' % (u, v, w))
 
 assert np.allclose([u, v, w], globVel)

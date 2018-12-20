@@ -6,7 +6,8 @@ Created on December 1 2018
 
 @author: Philippe Delandmeter
 
-Master file interpolating a 2D uniform velocity in an unstructured quadrilateral
+Master file interpolating a 2D uniform velocity
+in an unstructured C-grid quadrilateral
 """
 
 
@@ -19,16 +20,16 @@ y = [0, -.5, .5, .8]
 
 xsi = .3
 eta = .6
-globVel = [1.,1.]
+globVel = [1., 1.]
 
-u0 = h_u.get_edgeNormalVelocity(globVel, x, y, [0,3])
-U0 = u0 * i_u.length2d_lin_edge(x, y, [0,3])
-u1 = h_u.get_edgeNormalVelocity(globVel, x, y, [1,2])
-U1 = u1 * i_u.length2d_lin_edge(x, y, [1,2])
-v0 = h_u.get_edgeNormalVelocity(globVel, x, y, [1,0])
-V0 = v0 * i_u.length2d_lin_edge(x, y, [1,0])
-v1 = h_u.get_edgeNormalVelocity(globVel, x, y, [2,3])
-V1 = v1 * i_u.length2d_lin_edge(x, y, [2,3])
+u0 = h_u.get_edgeNormalVelocity(globVel, x, y, [0, 3])
+U0 = u0 * i_u.length2d_lin_edge(x, y, [0, 3])
+u1 = h_u.get_edgeNormalVelocity(globVel, x, y, [1, 2])
+U1 = u1 * i_u.length2d_lin_edge(x, y, [1, 2])
+v0 = h_u.get_edgeNormalVelocity(globVel, x, y, [1, 0])
+V0 = v0 * i_u.length2d_lin_edge(x, y, [1, 0])
+v1 = h_u.get_edgeNormalVelocity(globVel, x, y, [2, 3])
+V1 = v1 * i_u.length2d_lin_edge(x, y, [2, 3])
 
 jac = i_u.jacobian2D_lin(x, y, xsi, eta)
 dxsidt = i_u.interpolate(i_u.phi1D_lin, [U0, U1], xsi) / jac
@@ -36,8 +37,8 @@ detadt = i_u.interpolate(i_u.phi1D_lin, [V0, V1], eta) / jac
 
 dphidxsi, dphideta = i_u.dphidxsi2D_lin(xsi, eta)
 
-u = np.dot(dphidxsi, x) * dxsidt + np.dot(dphideta, x) * detadt 
-v = np.dot(dphidxsi, y) * dxsidt + np.dot(dphideta, y) * detadt 
-print('uv analytical: %1.16e, %1.16e' % (u, v) )
+u = np.dot(dphidxsi, x) * dxsidt + np.dot(dphideta, x) * detadt
+v = np.dot(dphidxsi, y) * dxsidt + np.dot(dphideta, y) * detadt
+print('uv analytical: %1.16e, %1.16e' % (u, v))
 
-assert np.allclose([u,v], globVel)
+assert np.allclose([u, v], globVel)
