@@ -6,6 +6,6 @@ In this notebook, we develop the motivation to this approach, showing why a spec
 
 ## Benchmark: conservative analytical flow
 
-![](https://github.com/OceanParcels/parcels_cgrid_interpolation_schemes/blob/adding_doc/c_grid_motivation/pics/two_jets_analytical.pdf)
+![](c_grid_motivation/pics/two_jets_analytical_crop.png)
 
 
