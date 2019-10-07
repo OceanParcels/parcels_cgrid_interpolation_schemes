@@ -32,3 +32,37 @@ The field discretised on the A-grid (with nodes in black on Fig. 2) is interpola
 
 It is not coincidence that the particles are perfectly integrated, even on a coarse mesh. This results from the original flow which is bi-linear, such as the A-grid interpolator.
 
+### C-grid mesh
+
+Let's now build a C-grid mesh of the same domain, again with 2 cells with $dx=1$ (Fig. 3).
+Each cell has 2 U-nodes (in red) and 2 V-nodes (in green).
+
+![C-grid mesh](c_grid_motivation/pics/two_jets_C_no_result_cropped.png)
+
+### 2 staggered A-grids interpolation
+
+The C-grid mesh (Fig. 3) could be naively interpreted as the combination of 2 staggered A-grids (Fig. 4)
+
+![C-grid interpreted as 2 staggered A-grids](c_grid_motivation/pics/two_jets_CWrong_no_result_cropped.png)
+
+In such case, the $u$ velocity could be interpolated on the $U$ mesh and the $v$ velocity on the $V$ mesh. While this approach is very simple, it results in a wrong dynamics, especially close to the boundary (Fig. 5)
+
+![Particle trajectories on two staggered A-grid using 2 mesh cells, resulting in a wrong dynamics](c_grid_motivation/pics/two_jets_CWrong_cropped.png)
+
+### C-grid interpolation
+
+The solution consists in interpolating direcly the C-grid mesh, as defined in Eqs 7-10 of the paper.
+In this simple example, Eqs 7-10 reduce to the simple equation:
+$$
+\begin{cases}
+u &= (1-\xi) U_0 + \xi U_1\\
+v &= (1-\eta) V_0 + \eta V_1.
+\end{cases}
+$$
+The C-grid interpolation reproduces exactly the particle dynamics (Fig. 6).
+
+![Particle trajectories on the C-grid, resulting in the correct dynamics](c_grid_motivation/pics/two_jets_C_cropped.png)
+
+## Conclusion
+In this example, we have shown how a simple flow is interpolated exactly by both A- and C-grids, noting that if a flow is provided on a C-grid, interpolating it as two staggered A-grids will result in erroneous dynamics.
+The error is not always as strong as illustrated in this example. It tends to be small on high resolution meshes and flows with low vorticity. However, errors can be particularly large close to boundaries, which are particularly important in a number of applications and should be treated carefully. The C-grid interpolator is an accurate scheme to resolve the flow as provided by the data.
