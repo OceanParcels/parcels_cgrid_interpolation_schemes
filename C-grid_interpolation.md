@@ -61,8 +61,8 @@ v &= (1-\eta) V_0 + \eta V_1.
 $$
 The C-grid interpolation reproduces exactly the particle dynamics (Fig. 6).
 
-![Particle trajectories on the C-grid, resulting in the correct dynamics](c_grid_motivation/pics/two_jets_C_cropped.png)
+![Particle trajectories on the C-grid, resulting in the exact dynamics](c_grid_motivation/pics/two_jets_C_cropped.png)
 
 ## Conclusion
 In this example, we have shown how a simple flow is interpolated exactly by both A- and C-grids, noting that if a flow is provided on a C-grid, interpolating it as two staggered A-grids will result in erroneous dynamics.
-The error is not always as strong as illustrated in this example. It tends to be small on high resolution meshes and flows with low vorticity. However, errors can be particularly large close to boundaries, which are particularly important in a number of applications and should be treated carefully. The C-grid interpolator is an accurate scheme to resolve the flow as provided by the data.
+The error is not always as strong as illustrated in this example. It tends to be small on high resolution meshes and flows with low vorticity. However, errors can be particularly large close to boundaries, which are particularly important coastal applications and should be treated carefully. The C-grid interpolator is an accurate scheme to resolve the flow when the data is on a C-grid itself.
