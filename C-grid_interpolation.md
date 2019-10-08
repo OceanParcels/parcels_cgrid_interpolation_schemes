@@ -20,6 +20,7 @@ for wich the continuity equation $u_x + v_y = 0$ holds.
 To visualize the flow, let's integrate the trajectory of 40 particles (Fig. 1)
 
 ![Analytical flow on the domain [-1:1]x[0:1]](c_grid_motivation/pics/two_jets_analytical_cropped.png)
+
 <p align="center"> <b> Fig. 1: </b> Analytical flow on the domain [-1:1]x[0:1] </p>
 
 ### A-grid interpolation
