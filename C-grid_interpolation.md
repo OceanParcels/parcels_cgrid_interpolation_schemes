@@ -20,7 +20,7 @@ for wich the continuity equation $u_x + v_y = 0$ holds.
 To visualize the flow, let's integrate the trajectory of 40 particles (Fig. 1)
 
 ![Analytical flow on the domain [-1:1]x[0:1]](c_grid_motivation/pics/two_jets_analytical_cropped.png)
-
+<p align="center"> <b> Fig. 1: </b> Analytical flow on the domain [-1:1]x[0:1] </p>
 
 ### A-grid interpolation
 
@@ -28,7 +28,10 @@ Let's now interpolate the field on an A-grid. To do so, we mesh the domain into 
 
 The field discretised on the A-grid (with nodes in black on Fig. 2) is interpolated following Eq. 1 of the paper. Integrating the particles on the discretised field leads to a perfect trajectory:
 
-![Particle trajectories on a A-grid using 2 mesh cells. Nodal values are located on the mesh vertices (in black).](c_grid_motivation/pics/two_jets_A_cropped.png)
+![Particle trajectories on an A-grid using 2 mesh cells. Nodal values are located on the mesh vertices (in black).](c_grid_motivation/pics/two_jets_A_cropped.png)
+
+<p align="center"> <b> Fig. 2: </b> Particle trajectories on an A-grid using 2 mesh cells. Nodal values are located on the mesh vertices (in black). </p>
+
 
 It is not coincidence that the particles are perfectly integrated, even on a coarse mesh. This results from the original flow which is bi-linear, such as the A-grid interpolator.
 
@@ -39,15 +42,22 @@ Each cell has 2 U-nodes (in red) and 2 V-nodes (in green).
 
 ![C-grid mesh](c_grid_motivation/pics/two_jets_C_no_result_cropped.png)
 
+<p align="center"> <b> Fig. 3: </b> C-grid mesh </p>
+
 ### 2 staggered A-grids interpolation
 
 The C-grid mesh (Fig. 3) could be naively interpreted as the combination of 2 staggered A-grids (Fig. 4)
 
 ![C-grid interpreted as 2 staggered A-grids](c_grid_motivation/pics/two_jets_CWrong_no_result_cropped.png)
 
+<p align="center"> <b> Fig. 4: </b> C-grid interpreted as 2 staggered A-grids </p>
+
 In such case, the $u$ velocity could be interpolated on the $U$ mesh and the $v$ velocity on the $V$ mesh. While this approach is very simple, it results in a wrong dynamics, especially close to the boundary (Fig. 5)
 
-![Particle trajectories on two staggered A-grid using 2 mesh cells, resulting in a wrong dynamics](c_grid_motivation/pics/two_jets_CWrong_cropped.png)
+![Particle trajectories on two staggered A-grids using 2 mesh cells, resulting in a wrong dynamics](c_grid_motivation/pics/two_jets_CWrong_cropped.png)
+
+<p align="center"> <b> Fig. 5: </b> Particle trajectories on two staggered A-grids using 2 mesh cells, resulting in a wrong dynamics </p>
+
 
 ### C-grid interpolation
 
@@ -62,6 +72,8 @@ $$
 The C-grid interpolation reproduces exactly the particle dynamics (Fig. 6).
 
 ![Particle trajectories on the C-grid, resulting in the exact dynamics](c_grid_motivation/pics/two_jets_C_cropped.png)
+
+<p align="center"> <b> Fig. 6: </b> Particle trajectories on the C-grid, resulting in the exact dynamics </p>
 
 ## Conclusion
 In this example, we have shown how a simple flow is interpolated exactly by both A- and C-grids, noting that if a flow is provided on a C-grid, interpolating it as two staggered A-grids will result in erroneous dynamics.
